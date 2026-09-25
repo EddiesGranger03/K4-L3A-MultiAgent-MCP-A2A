@@ -25,6 +25,11 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Kích hoạt chế độ tự động cho pytest-asyncio:
+# Khi asyncio_mode = "auto", tất cả async def test_*() sẽ tự động được nhận diện
+# và chạy bởi plugin pytest-asyncio mà không cần decorator @pytest.mark.asyncio
+asyncio_mode = "auto"
+
 
 [tool.ruff]
 line-length = 100
