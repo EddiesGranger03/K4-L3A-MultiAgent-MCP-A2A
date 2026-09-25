@@ -151,6 +151,8 @@ day09 run
 day09 validate
 ```
 
+Nếu MCP mất kết nối giữa chừng, chạy `day09 run --resume` để tiếp tục từ các case đã hoàn tất. Mỗi case có trace tạm riêng trong `traces/cases/`; sau khi đủ 100 case, lệnh ghép chúng thành `traces/trace.jsonl`. Dùng `day09 run --no-model` khi cần so sánh logic evidence mà không gọi OpenRouter.
+
 Kết quả được tạo tại:
 
 ```text
@@ -159,6 +161,22 @@ traces/trace.jsonl
 ```
 
 Nếu output pass schema nhưng điểm thấp, cần kiểm tra lại semantic, evidence, consistency, confidence và workflow — schema chỉ là một phần nhỏ của điểm.
+
+Để chạy thử một case với model dưới 10B qua OpenRouter, điền thêm vào `.env`:
+
+```dotenv
+OPENROUTER_API_KEY=sk-or-v1-your_key
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+MODEL=liquid/lfm-2.5-2.6b:free
+```
+
+Sau đó chạy:
+
+```bash
+day09 sample --case-id L3A_CASE_001
+```
+
+Lệnh này tạo `demo/L3A_CASE_001.output.json`, `demo/L3A_CASE_001.triage.json` và `demo/L3A_CASE_001.trace.jsonl`. `triage.json` cho thấy model đã xử lý request; output chính vẫn theo L3A schema và chỉ dùng MCP evidence thật.
 
 ## 7. Đóng gói và nộp bài
 
